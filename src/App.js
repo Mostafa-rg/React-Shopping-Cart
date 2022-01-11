@@ -3,15 +3,14 @@ import ProductDetails from './components/ProductDetails';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navber from './components/shared/Navber';
 import ShopCart from './components/ShopCart';
+import {Provider} from 'react-redux'
+// Redux
+import store from './redux/store';
 
-// Context
-import ProductsContextProvider from './context/ProductsContextProvider';
-import CartContextProvider from './context/CartContextProvider';
 function App() {
   return (
     <div className="App">
-      <ProductsContextProvider>
-        <CartContextProvider>
+      <Provider store={store}>
           <Navber/>
           <Switch>
             <Route path = "/details/:id" component={ProductDetails}/>
@@ -19,8 +18,7 @@ function App() {
             <Route path= "/cart" component={ShopCart}/>
             <Redirect to = "/store"/>
           </Switch>
-        </CartContextProvider>
-      </ProductsContextProvider>
+      </Provider>
     </div>
   );
 }
